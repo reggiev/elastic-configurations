@@ -1,0 +1,33 @@
+configMapGenerator:
+- name: logstash-cm
+  files:
+  - logstash/jvm.options
+  - logstash/log4j2.properties
+  - logstash/logstash-sample.conf
+  - logstash/pipelines.yml
+  - logstash/logstash.yml
+  - logstash/startup.options
+
+# Also define pipelines in pipelines.yaml
+- name: logstash-pipelines-cm
+  files:
+  - logstash/pipelines/logstash.conf
+
+- name: filebeat-cm
+  files:
+  - filebeat/filebeat.yml
+
+- name: elasticsearch-cm
+  files:
+  - elasticsearch/jvm.options
+  - elasticsearch/log4j2.file.properties
+  - elasticsearch/elasticsearch.yml
+  - elasticsearch/log4j2.properties
+
+- name: kibana-cm
+  files:
+  - kibana/kibana.yml
+  - kibana/node.options
+
+generatorOptions:
+ disableNameSuffixHash: true

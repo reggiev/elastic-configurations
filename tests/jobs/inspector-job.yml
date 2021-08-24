@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-function-inspector
+spec:
+  template:
+    spec:
+      containers:
+      - name: app-function-inspector-image
+        image: docker.io/reggievaldez/app-function-inspector
+        command: ["python3",  "src/runner.py"]
+      restartPolicy: Never
+  backoffLimit: 2
