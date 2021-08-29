@@ -1,21 +1,12 @@
-filebeat.config:
-  modules:
-    path: ${path.config}/modules.d/*.yml
-    reload.enabled: false
-
-# filebeat.autodiscover:
-#   providers:
-#     - type: docker
-#       hints.enabled: false
-
-processors:
-- add_cloud_metadata: ~
-
-filebeat.inputs:
-- type: tcp
-  enabled: true
-  max_message_size: 10MiB
-  host: "http://filebeat-service:9000"
+filebeat:
+  config:
+    modules:
+      path: ${path.config}/modules.d/*.yml
+      reload.enabled: false
+  inputs:
+  - type: log
+    paths:
+      - /var/log/python-test/test.log
 
 # output.elasticsearch:
 #   hosts: 'http://elasticsearch-service:9200'
@@ -23,4 +14,4 @@ filebeat.inputs:
   # password: '${ELASTICSEARCH_PASSWORD:}'
 
 output.logstash:
-  hosts: "http://logstash-service:5044"
+  hosts: ["logstash-service:5044"]
